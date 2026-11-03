@@ -1,0 +1,269 @@
+.reservation-panel .eyebrow,
+.reservation-confirmation .eyebrow {
+  color: #865c49;
+}
+.reservation-panel h2[data-step-heading] {
+  font-size: 51px;
+  line-height: 0.96;
+  margin-block: 18px 22px;
+}
+[data-step-heading]:focus {
+  outline: none;
+}
+.step-intro {
+  font-size: 12px;
+  line-height: 1.8;
+  color: #75635b;
+  margin-bottom: 28px;
+  max-width: 440px;
+}
+.reservation-controls {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.reservation-panel .button,
+.reservation-confirmation .button {
+  background: var(--ink);
+  color: var(--cream);
+  border-color: var(--ink);
+}
+.reservation-panel .button:hover,
+.reservation-confirmation .button:hover {
+  background: #553e43;
+}
+.time-picker {
+  border: 0;
+  padding: 0;
+  margin: 0 0 27px;
+  min-width: 0;
+}
+.seating-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 9px;
+}
+.seating-grid button {
+  min-height: 58px;
+  padding: 11px;
+  border: 1px solid var(--paper-line);
+  background: transparent;
+  color: var(--ink);
+}
+.seating-grid strong {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+}
+.seating-grid small {
+  display: block;
+  font-size: 8px;
+  color: #75635b;
+  margin-top: 6px;
+}
+.seating-grid button.selected {
+  color: var(--cream);
+  background: var(--ink);
+  border-color: var(--ink);
+}
+.seating-grid button.selected small {
+  color: #e4cdbd;
+}
+.seating-grid button:disabled {
+  opacity: 0.5;
+  text-decoration: line-through;
+}
+.availability-status {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 11px;
+  color: #75635b;
+  min-height: 60px;
+  line-height: 1.7;
+}
+.availability-empty {
+  padding: 20px 0;
+  font-size: 11px;
+  line-height: 1.7;
+  color: #705b53;
+}
+.availability-empty h3 {
+  font-size: 28px;
+  color: var(--ink);
+  margin-bottom: 9px;
+}
+.availability-empty .text-link {
+  font-size: 10px;
+  color: var(--ink);
+  border: 0;
+  border-bottom: 1px solid var(--paper-line);
+  background: none;
+  padding-inline: 0;
+}
+.reservation-panel .sample-details {
+  background: none;
+  border: 0;
+  border-bottom: 1px solid var(--paper-line);
+  padding-inline: 0;
+  color: #80543c;
+  margin-bottom: 25px;
+  font-size: 10px;
+}
+.reservation-panel form > .privacy-note {
+  margin-block: 22px 28px;
+}
+.back-button {
+  display: block;
+  margin-top: 20px;
+  padding: 10px 0;
+  background: none;
+  border: 0;
+  font-size: 10px;
+  color: #705b53;
+}
+.review-list {
+  margin: 0;
+}
+.review-list > div {
+  padding-block: 20px;
+  border-bottom: 1px solid var(--paper-line);
+}
+.review-list dt {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.11em;
+  color: #75635b;
+}
+.review-list dd {
+  margin: 10px 0 0;
+  font-size: 13px;
+  line-height: 1.8;
+  position: relative;
+  padding-right: 45px;
+}
+.review-list dd > button {
+  position: absolute;
+  right: 0;
+  top: 0;
+  background: none;
+  border: 0;
+  border-bottom: 1px solid var(--paper-line);
+  padding: 5px 0;
+  color: #80543c;
+  font-size: 10px;
+}
+.simulation-note {
+  display: flex;
+  gap: 17px;
+  align-items: center;
+  padding: 25px 0;
+  font-size: 10px;
+  line-height: 1.8;
+  color: #705b53;
+}
+.simulation-note > span {
+  font-size: 35px;
+  color: #865c49;
+}
+.reservation-confirmation {
+  text-align: center;
+  padding-block: 65px 85px;
+  max-width: 850px;
+}
+.confirmation-symbol {
+  display: block;
+  font-size: 55px;
+  color: #94674d;
+  margin-bottom: 20px;
+}
+.reservation-confirmation h1 {
+  font-size: 77px;
+  line-height: 0.95;
+  letter-spacing: -0.025em;
+  margin-block: 22px 25px;
+}
+.reservation-confirmation h1 em {
+  color: #865c49;
+}
+.reservation-confirmation > p:not(.eyebrow) {
+  font-size: 13px;
+  color: #75635b;
+  line-height: 1.8;
+}
+.confirmation-ticket {
+  border-block: 1px solid var(--paper-line);
+  padding: 30px;
+  max-width: 570px;
+  margin: 40px auto 30px;
+}
+.confirmation-ticket h2 {
+  font-size: 42px;
+  letter-spacing: 0.08em;
+  margin-block: 20px;
+}
+.confirmation-ticket > p:not(.eyebrow) {
+  font-size: 12px;
+  line-height: 1.8;
+}
+.confirmation-ticket > strong {
+  display: block;
+  font-weight: 500;
+  font-size: 13px;
+  margin-top: 9px;
+}
+.confirmation-ticket > .privacy-note {
+  font-size: 10px !important;
+  margin-top: 25px;
+}
+.confirmation-actions {
+  display: flex;
+  gap: 25px;
+  justify-content: center;
+  align-items: center;
+}
+.reservation-confirmation .text-link {
+  font-size: 10px;
+  border-color: var(--paper-line);
+}
+@media (max-width: 760px) {
+  .reservation-panel h2[data-step-heading] {
+    font-size: 47px;
+    margin-top: 13px;
+  }
+  .step-intro {
+    font-size: 11px;
+    margin-bottom: 27px;
+  }
+  .reservation-controls {
+    display: block;
+  }
+  .reservation-controls app-field:last-child {
+    display: none;
+  }
+  .seating-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+  }
+  .seating-grid button {
+    min-height: 55px;
+    padding: 10px 5px;
+  }
+  .reservation-confirmation {
+    padding-block: 45px 60px;
+  }
+  .reservation-confirmation h1 {
+    font-size: 55px;
+  }
+  .confirmation-ticket {
+    padding: 25px 0;
+  }
+  .confirmation-actions {
+    flex-direction: column;
+    gap: 15px;
+  }
+  .confirmation-actions > .button {
+    width: 100%;
+  }
+}

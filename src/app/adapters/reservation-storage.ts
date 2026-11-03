@@ -1,4 +1,4 @@
-import { isDateOnly, partyError, SEATINGS, type Reservation } from './reservations';
+import { isDateOnly, partyError, SEATINGS, type Reservation } from '../domain/reservations';
 export const STORAGE_KEY = 'sora:reservations:v1';
 export interface StorageAdapter {
   getItem(key: string): string | null;

@@ -3,6 +3,8 @@
 @import '@fontsource/dm-sans/400.css';
 @import '@fontsource/dm-sans/500.css';
 @import '@fontsource/dm-sans/600.css';
+@import './app/shared/forms.css';
+@import './app/features/reservation/reservation.css';
 :root {
   --ink: #261b23;
   --dark: #21181e;

@@ -12,7 +12,12 @@ import {
   partyError,
   seedReservations,
 } from './reservations';
-import { readReservations, STORAGE_KEY, writeReservations, type StorageAdapter } from './storage';
+import {
+  readReservations,
+  STORAGE_KEY,
+  writeReservations,
+  type StorageAdapter,
+} from '../adapters/reservation-storage';
 describe('local calendar and reservation rules', () => {
   it('uses local calendar dates and UTC arithmetic across leap years and DST', () => {
     expect(localToday(() => new Date(2028, 1, 29, 23, 59))).toBe('2028-02-29');

@@ -21,7 +21,10 @@ jobs:
         with:
           node-version-file: .nvmrc
           cache: npm
+      - name: Use the pinned package manager
+        run: npm install --global npm@10.9.8
       - run: npm ci
+        name: Install the verified lockfile
       - run: npm run lint
       - run: npm run format:check
       - run: npm run typecheck
