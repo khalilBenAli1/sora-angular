@@ -16,4 +16,4 @@ Verified 2026-11-03 against the production build.
 
 Actual desktop/mobile screenshots are in `docs/screenshots`. Each was captured in a fresh browser context after the route-specific heading, fonts, imagery and availability were ready. Build payload measurements are in `BUILD_EVIDENCE.json`.
 
-Public deployment and CI are verified separately before the final demo link is published. No performance score or accessibility certification is claimed.
+Public GitHub Pages deployment verified: https://khalilbenali1.github.io/sora-angular/ . Anonymous HTTP200, direct routes and the deployed create/edit/reload/cancel journey passed, alongside deployed route accessibility/runtime checks. Release CI and deployment: https://github.com/khalilBenAli1/sora-angular/actions/runs/41570751917 . No performance score or accessibility certification is claimed.

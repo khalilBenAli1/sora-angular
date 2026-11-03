@@ -15,7 +15,9 @@ An atmospheric dining-room opening, an oversized Newsreader wordmark, horizontal
 - Versioned local reservation persistence with corrupt/denied-storage recovery. Contact names and emails stay in memory; the desk stores generated guest labels.
 - Keyboard focus management, reduced-motion support, responsive layouts and deliberately handled missing routes.
 
-The public demo link will be added after the Pages deployment is verified. No real restaurant, payment, email or authentication service is connected.
+**[Open the verified live demo](https://khalilbenali1.github.io/sora-angular/)** · [Source repository](https://github.com/khalilBenAli1/sora-angular)
+
+The public deployment, direct routes and complete reservation/management journey have been verified. No real restaurant, payment, email or authentication service is connected.
 
 ## Run
 
