@@ -48,6 +48,17 @@ describe('reservation form orchestration', () => {
     flow.contactForm.controls.consent.setValue(true);
     expect(flow.toReview()).toBe(true);
   });
+  it.each(['alex<smith>@example.com', 'alex,smith@example.com'])(
+    'does not advance the reactive contact form for unsupported email punctuation: %s',
+    (email) => {
+      const flow = TestBed.inject(ReservationFlow);
+      TestBed.tick();
+      flow.contactForm.setValue({ name: 'Léa Ben Ali', email, consent: true });
+      expect(flow.toReview()).toBe(false);
+      expect(flow.contactForm.controls.email.hasError('message')).toBe(true);
+      expect(flow.contactErrors().email).toBe('Please enter a valid email address.');
+    },
+  );
   it('snapshots the confirmation, clears contacts, and restarts without reviving the reference', () => {
     const flow = TestBed.inject(ReservationFlow);
     const store = TestBed.inject(ReservationStore);

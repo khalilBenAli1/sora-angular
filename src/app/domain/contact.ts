@@ -10,7 +10,8 @@ export function nameError(value: string): string | null {
     : 'Please enter a name between 2 and 100 characters.';
 }
 export function emailError(value: string): string | null {
-  return value.length <= 254 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim())
+  return value.length <= 254 &&
+    /^[a-z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-z0-9.-]+\.[a-z0-9.-]+$/i.test(value.trim())
     ? null
     : 'Please enter a valid email address.';
 }
