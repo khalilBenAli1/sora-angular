@@ -1,15 +1,18 @@
 <a class="skip-link" href="#main-content" (click)="skip($event)">Skip to content</a>
-<header class="site-header shell">
-  <a routerLink="/" class="wordmark" aria-label="Sora home">SORA<span>SEASONAL DINING</span></a>
+<header class="site-header" [class.overlay]="isHome()">
+  <a routerLink="/" class="compact-wordmark" aria-label="Sora home">SORA</a>
   <nav aria-label="Main" class="desktop-nav">
-    <a routerLink="/" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active"
-      >The menu</a
-    >
-    <a routerLink="/story" routerLinkActive="active">Our story</a>
-    <a routerLink="/visit" routerLinkActive="active">Find us</a>
+    <a
+      routerLink="/"
+      fragment="menu"
+      [routerLinkActiveOptions]="{ exact: true }"
+      routerLinkActive="active"
+      >Menu</a
+    ><a routerLink="/story" routerLinkActive="active">Philosophy</a
+    ><a routerLink="/visit" routerLinkActive="active">Visit</a>
   </nav>
-  <a routerLink="/reserve" class="button outline header-book"
-    >Book a table <span aria-hidden="true">↗</span></a
+  <a routerLink="/reserve" class="header-reserve"
+    >Reserve a table <span aria-hidden="true">↗</span></a
   >
   <button
     class="icon-button menu-toggle"
@@ -21,26 +24,32 @@
   </button>
 </header>
 <main id="main-content" tabindex="-1"><router-outlet (activate)="onNavigate()" /></main>
-<footer class="site-footer shell">
-  <div class="footer-invitation">
-    <p class="eyebrow">A little less hurry. A little more evening.</p>
-    <a routerLink="/reserve">A place at <em>our table.</em><span aria-hidden="true">↗</span></a>
+<footer class="restaurant-footer">
+  <div class="shell footer-grid">
+    <a routerLink="/" class="footer-wordmark">SORA</a>
+    <div>
+      <p class="eyebrow">The evening</p>
+      <p>Tuesday–Sunday<br />18:00–22:30</p>
+      <a routerLink="/reserve">Reserve a table ↗</a>
+    </div>
+    <nav aria-label="Footer">
+      <a routerLink="/" fragment="menu">The menu</a><a routerLink="/story">Our philosophy</a
+      ><a routerLink="/visit">Plan your visit</a>
+    </nav>
   </div>
-  <div class="footer-row">
-    <a routerLink="/" class="wordmark">SORA</a>
-    <p>An original restaurant demo. All reservations are simulated.</p>
-    <a routerLink="/desk">Demo reservation desk <span aria-hidden="true">↗</span></a>
+  <div class="shell footer-meta">
+    <p>Original restaurant demo · All reservations are simulated</p>
+    <a routerLink="/desk">Demo reservation desk ↗</a><span>Good food. Good company.</span>
   </div>
 </footer>
-<app-modal [open]="menuOpen()" title="Stay a little longer" (closed)="menuOpen.set(false)">
-  <nav class="mobile-nav" aria-label="Mobile">
+<app-modal [open]="menuOpen()" title="The evening awaits" (closed)="menuOpen.set(false)"
+  ><nav class="mobile-nav" aria-label="Mobile">
     <a (click)="menuOpen.set(false)" routerLink="/">The menu</a
-    ><a (click)="menuOpen.set(false)" routerLink="/story">Our story</a
-    ><a (click)="menuOpen.set(false)" routerLink="/visit">Find us</a
-    ><a (click)="menuOpen.set(false)" routerLink="/reserve" class="button"
-      >Book a table <span aria-hidden="true">↗</span></a
+    ><a (click)="menuOpen.set(false)" routerLink="/story">Our philosophy</a
+    ><a (click)="menuOpen.set(false)" routerLink="/visit">Plan your visit</a
+    ><a (click)="menuOpen.set(false)" routerLink="/reserve" class="button">Reserve a table ↗</a
     ><a (click)="menuOpen.set(false)" routerLink="/desk" class="small-link"
       >Demo reservation desk</a
     >
-  </nav>
-</app-modal>
+  </nav></app-modal
+>

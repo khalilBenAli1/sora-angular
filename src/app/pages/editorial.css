@@ -1,0 +1,142 @@
+.editorial-page {
+  background: var(--paper);
+  color: var(--ink);
+  padding-bottom: 80px;
+}
+.editorial-intro {
+  text-align: center;
+  padding-block: 75px;
+}
+.editorial-page .eyebrow {
+  color: #795d3c;
+}
+.editorial-intro h1 {
+  font-size: 76px;
+  line-height: 1.06;
+  letter-spacing: -0.025em;
+  margin-block: 28px;
+}
+.editorial-intro > p:not(.eyebrow) {
+  max-width: 570px;
+  margin-inline: auto;
+  font-size: 13px;
+  line-height: 1.9;
+  color: #706653;
+}
+.editorial-intro .button {
+  margin-top: 35px;
+}
+.editorial-photo {
+  height: 65vh;
+  min-height: 400px;
+  max-height: 700px;
+  position: relative;
+}
+.editorial-photo > img {
+  height: 100%;
+}
+.editorial-photo figcaption {
+  position: absolute;
+  bottom: 25px;
+  left: 40px;
+  color: var(--cream);
+  font-size: 10px;
+  background: #26251de6;
+  padding: 13px 17px;
+}
+.editorial-reading {
+  max-width: 670px;
+  padding-top: 75px;
+}
+.editorial-reading h2 {
+  font-size: 58px;
+  line-height: 1.1;
+  margin-block: 25px;
+}
+.editorial-reading > p:not(.eyebrow) {
+  font-size: 13px;
+  line-height: 2;
+  color: #706653;
+  margin-bottom: 23px;
+}
+.editorial-reading .button {
+  margin-top: 10px;
+}
+.visit-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12%;
+  padding-bottom: 30px;
+}
+.visit-grid h2 {
+  font-size: 49px;
+  line-height: 1.1;
+  margin-block: 20px 25px;
+}
+.visit-grid dl > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 25px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--paper-line);
+  font-size: 11px;
+}
+.visit-grid dd {
+  margin: 0;
+  color: #706653;
+}
+.visit-grid section > p:not(.eyebrow) {
+  font-size: 13px;
+  line-height: 1.9;
+  color: #706653;
+}
+.visit-grid .button {
+  margin-top: 30px;
+}
+.visit-grid .text-link {
+  display: table;
+  margin-top: 18px;
+}
+@media (max-width: 760px) {
+  .editorial-page {
+    padding-bottom: 50px;
+  }
+  .editorial-intro {
+    padding-block: 45px;
+  }
+  .editorial-intro h1 {
+    font-size: 45px;
+    line-height: 1.12;
+  }
+  .editorial-intro > p:not(.eyebrow) {
+    font-size: 12px;
+  }
+  .editorial-photo {
+    height: 50vh;
+    min-height: 350px;
+  }
+  .editorial-photo figcaption {
+    left: 20px;
+    right: 20px;
+    font-size: 8px;
+  }
+  .editorial-reading {
+    padding-top: 45px;
+  }
+  .editorial-reading h2 {
+    font-size: 43px;
+  }
+  .editorial-reading > p:not(.eyebrow) {
+    font-size: 12px;
+  }
+  .visit-grid {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+  .visit-grid h2 {
+    font-size: 43px;
+  }
+  .visit-grid section > p:not(.eyebrow) {
+    font-size: 12px;
+  }
+}

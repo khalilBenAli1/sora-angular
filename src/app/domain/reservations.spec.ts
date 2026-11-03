@@ -12,7 +12,12 @@ import {
   partyError,
   seedReservations,
 } from './reservations';
-import { readReservations, STORAGE_KEY, writeReservations, type StorageAdapter } from './storage';
+import {
+  readReservations,
+  STORAGE_KEY,
+  writeReservations,
+  type StorageAdapter,
+} from '../adapters/reservation-storage';
 describe('local calendar and reservation rules', () => {
   it('uses local calendar dates and UTC arithmetic across leap years and DST', () => {
     expect(localToday(() => new Date(2028, 1, 29, 23, 59))).toBe('2028-02-29');
@@ -124,5 +129,22 @@ describe('validated, contact-free local persistence', () => {
     expect(readReservations(null)).toBeNull();
     expect(readReservations(denied)).toBeNull();
     expect(writeReservations(denied, [])).toBe(false);
+  });
+  it.each([
+    { id: 'bad identifier' },
+    { date: '2026-02-30' },
+    { time: '25:00' },
+    { party: 0 },
+    { party: 7 },
+    { party: 1.5 },
+    { status: 'arrived' },
+    { guest: 'A real contact name' },
+  ])('rejects an invalid field in an otherwise complete stored record: %j', (patch) => {
+    const valid = seedReservations('2026-11-03')[0];
+    if (!valid) throw new Error('Missing fixture');
+    const invalid = { ...valid, ...patch };
+    expect(
+      readReservations(memory(JSON.stringify({ version: 1, reservations: [invalid] }))),
+    ).toBeNull();
   });
 });
