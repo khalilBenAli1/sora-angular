@@ -82,7 +82,7 @@ export class Calendar {
     effect(() => {
       const date = this.date();
       this.month.set(
-        `${(isDateOnly(date) && date >= this.earliest() ? date : this.earliest()).slice(0, 7)}-01`,
+        `${(isDateOnly(date) && !dateError(date, this.earliest()) ? date : this.earliest()).slice(0, 7)}-01`,
       );
     });
   }

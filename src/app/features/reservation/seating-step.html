@@ -20,62 +20,71 @@
         [attr.aria-describedby]="flow.dateError() ? 'date-error' : null"
     /></app-field>
   </div>
-  <app-calendar
-    [date]="flow.choice().date"
-    [earliest]="flow.today"
-    (chosen)="flow.form.controls.date.setValue($event)"
-  />
-  <fieldset class="time-picker" [attr.aria-describedby]="flow.timeError() ? 'time-error' : null">
-    <legend>Time</legend>
-    @if (flow.availability().status === 'loading') {
-      <p role="status" class="availability-status">
-        <span class="small-spinner" aria-hidden="true"></span>Finding a place for you…
-      </p>
-    }
-    @if (flow.availability().status === 'error') {
-      <div class="availability-empty" role="alert">
-        <h3>A small interruption.</h3>
-        <p>{{ flow.availability().message }}</p>
-        <button type="button" class="text-link" (click)="flow.load(true)">
-          Try again <span aria-hidden="true">↗</span>
-        </button>
-      </div>
-    }
-    @if (flow.availability().status === 'ready') {
-      <div class="seating-grid">
-        @for (slot of flow.availability().slots; track slot.time) {
-          <button
-            type="button"
-            [class.selected]="flow.choice().time === slot.time"
-            [attr.aria-pressed]="flow.choice().time === slot.time"
-            [disabled]="!slot.available"
-            (click)="flow.chooseTime(slot.time)"
-          >
-            <strong>{{ slot.time }}</strong
-            ><small>{{ slot.available ? slot.remaining + ' places' : 'Full' }}</small>
-          </button>
+  <div class="seating-workspace">
+    <div>
+      <app-calendar
+        [date]="flow.choice().date"
+        [earliest]="flow.today"
+        (chosen)="flow.form.controls.date.setValue($event)"
+      />
+    </div>
+    <div>
+      <fieldset
+        class="time-picker"
+        [attr.aria-describedby]="flow.timeError() ? 'time-error' : null"
+      >
+        <legend>Time</legend>
+        @if (flow.availability().status === 'loading') {
+          <p role="status" class="availability-status">
+            <span class="small-spinner" aria-hidden="true"></span>Finding a place for you…
+          </p>
         }
-      </div>
-      @if (!flow.hasTimes()) {
-        <div class="availability-empty" role="status">
-          <p>{{ flow.availability().message }}</p>
-          <button type="button" class="text-link" (click)="nextEvening()">
-            Try another evening <span aria-hidden="true">↗</span>
-          </button>
-        </div>
+        @if (flow.availability().status === 'error') {
+          <div class="availability-empty" role="alert">
+            <h3>A small interruption.</h3>
+            <p>{{ flow.availability().message }}</p>
+            <button type="button" class="text-link" (click)="flow.load(true)">
+              Try again <span aria-hidden="true">↗</span>
+            </button>
+          </div>
+        }
+        @if (flow.availability().status === 'ready') {
+          <div class="seating-grid">
+            @for (slot of flow.availability().slots; track slot.time) {
+              <button
+                type="button"
+                [class.selected]="flow.choice().time === slot.time"
+                [attr.aria-pressed]="flow.choice().time === slot.time"
+                [disabled]="!slot.available"
+                (click)="flow.chooseTime(slot.time)"
+              >
+                <strong>{{ slot.time }}</strong
+                ><small>{{ slot.available ? slot.remaining + ' places' : 'Full' }}</small>
+              </button>
+            }
+          </div>
+          @if (!flow.hasTimes()) {
+            <div class="availability-empty" role="status">
+              <p>{{ flow.availability().message }}</p>
+              <button type="button" class="text-link" (click)="nextEvening()">
+                Try another evening <span aria-hidden="true">↗</span>
+              </button>
+            </div>
+          }
+        }
+        @if (flow.availability().status === 'idle') {
+          <p class="availability-status">{{ flow.availability().message }}</p>
+        }
+        @if (flow.timeError()) {
+          <p class="field-error" id="time-error">{{ flow.timeError() }}</p>
+        }
+      </fieldset>
+      @if (flow.notice()) {
+        <p class="field-error" role="alert">{{ flow.notice() }}</p>
       }
-    }
-    @if (flow.availability().status === 'idle') {
-      <p class="availability-status">{{ flow.availability().message }}</p>
-    }
-    @if (flow.timeError()) {
-      <p class="field-error" id="time-error">{{ flow.timeError() }}</p>
-    }
-  </fieldset>
-  @if (flow.notice()) {
-    <p class="field-error" role="alert">{{ flow.notice() }}</p>
-  }
-  <button class="button full-width" type="submit">
-    Continue <span aria-hidden="true">↗</span>
-  </button>
+      <button class="button full-width" type="submit">
+        Continue <span aria-hidden="true">↗</span>
+      </button>
+    </div>
+  </div>
 </form>

@@ -267,3 +267,60 @@
     width: 100%;
   }
 }
+/* A restaurant booking folio, separate from the hotel layout. */
+.reservation-panel h2[data-step-heading] {
+  font-size: 39px;
+  line-height: 1.1;
+  margin-block: 13px 16px;
+}
+.seating-workspace {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 55px;
+  align-items: start;
+}
+.seating-workspace > div {
+  min-width: 0;
+}
+.seating-workspace .time-picker {
+  margin-top: 12px;
+}
+.seating-workspace .seating-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.seating-workspace .full-width {
+  margin-top: 15px;
+}
+.reservation-panel .reservation-controls {
+  max-width: 100%;
+  margin-bottom: 10px;
+}
+.reservation-confirmation {
+  background: var(--paper);
+  color: var(--ink);
+  padding: 50px 45px;
+  margin-block: 60px;
+}
+@media (max-width: 760px) {
+  .seating-workspace {
+    display: block;
+  }
+  .seating-workspace .seating-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .reservation-panel h2[data-step-heading] {
+    font-size: 39px;
+  }
+  .reservation-panel .step-intro {
+    font-size: 11px;
+  }
+  .reservation-confirmation {
+    padding: 35px 22px;
+    margin-block: 15px;
+  }
+}
+
+.review-list dd,
+.reservation-confirmation > p {
+  overflow-wrap: anywhere;
+}

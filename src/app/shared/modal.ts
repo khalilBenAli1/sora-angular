@@ -10,12 +10,7 @@ import {
 @Component({
   selector: 'app-modal',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  template: ` <dialog
-    #dialog
-    [attr.aria-label]="title()"
-    (cancel)="closed.emit()"
-    (close)="closed.emit()"
-  >
+  template: ` <dialog #dialog [attr.aria-label]="title()" (cancel)="cancel($event)">
     <div class="modal-heading">
       <h2>{{ title() }}</h2>
       <button
@@ -42,5 +37,10 @@ export class Modal {
       if (this.open() && !dialog.open) dialog.showModal();
       else if (!this.open() && dialog.open) dialog.close();
     });
+  }
+  cancel(event: Event) {
+    // Parent state owns closing. Native close events can arrive after a rapid reopen.
+    event.preventDefault();
+    this.closed.emit();
   }
 }

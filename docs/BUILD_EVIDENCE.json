@@ -1,0 +1,76 @@
+{
+  "note": "Measured local production output. Gzip sizes are computed using Node zlib, not Lighthouse or field-performance scores.",
+  "files": [
+    {
+      "name": "chunk-Br-mRVYj.js",
+      "bytes": 1702,
+      "gzipBytes": 911
+    },
+    {
+      "name": "chunk-CzyAikVV.js",
+      "bytes": 25220,
+      "gzipBytes": 7683
+    },
+    {
+      "name": "chunk-DRoSxBd9.js",
+      "bytes": 10450,
+      "gzipBytes": 4208
+    },
+    {
+      "name": "chunk-DtPGk9N4.js",
+      "bytes": 48641,
+      "gzipBytes": 12761
+    },
+    {
+      "name": "chunk-UOoA0EKz.js",
+      "bytes": 1671,
+      "gzipBytes": 966
+    },
+    {
+      "name": "chunk-_uIf225H.js",
+      "bytes": 686,
+      "gzipBytes": 491
+    },
+    {
+      "name": "chunk-iY7yeAoA.js",
+      "bytes": 21288,
+      "gzipBytes": 6671
+    },
+    {
+      "name": "main-TK3HEFPV.js",
+      "bytes": 258098,
+      "gzipBytes": 79524
+    },
+    {
+      "name": "styles-RL6EWUYO.css",
+      "bytes": 27952,
+      "gzipBytes": 6248
+    }
+  ],
+  "screenshots": [
+    {
+      "name": "desk-desktop.jpg",
+      "bytes": 97338
+    },
+    {
+      "name": "desk-mobile.jpg",
+      "bytes": 70388
+    },
+    {
+      "name": "home-desktop.jpg",
+      "bytes": 406257
+    },
+    {
+      "name": "home-mobile.jpg",
+      "bytes": 130766
+    },
+    {
+      "name": "reservation-desktop.jpg",
+      "bytes": 114314
+    },
+    {
+      "name": "reservation-mobile.jpg",
+      "bytes": 59328
+    }
+  ]
+}

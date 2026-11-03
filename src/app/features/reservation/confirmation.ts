@@ -16,8 +16,8 @@ import type { ConfirmedReservation } from './reservation-flow';
       <h2>SORA</h2>
       <p>{{ date(confirmation().reservation.date, { weekday: 'long', year: 'numeric' }) }}</p>
       <strong
-        >{{ confirmation().reservation.time }} ·
-        {{ confirmation().reservation.party }} guests</strong
+        >{{ confirmation().reservation.time }} · {{ confirmation().reservation.party }}
+        {{ confirmation().reservation.party === 1 ? 'guest' : 'guests' }}</strong
       >
       <p class="privacy-note">
         Added to the local demo desk as {{ confirmation().reservation.guest }}. No table is held, no

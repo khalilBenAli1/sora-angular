@@ -1,48 +1,54 @@
 @if (flow.confirmed(); as confirmation) {
   <app-reservation-confirmation [confirmation]="confirmation" (restart)="flow.restart()" />
 } @else {
-  <div class="reservation-page shell">
-    <a routerLink="/" class="back-link">← Back to the menu</a>
-    <div class="reservation-title">
-      <div>
-        <p class="eyebrow">Reservations · Take your time</p>
-        <h1>Good company.<br /><em>A memorable evening.</em></h1>
+  <div class="reservation-page">
+    <img
+      class="reservation-atmosphere"
+      src="images/dining-room-1280.webp"
+      width="1672"
+      height="941"
+      alt=""
+      aria-hidden="true"
+    />
+    <div class="reservation-frame">
+      <a routerLink="/" class="back-link">← The menu</a>
+      <div class="reservation-title">
+        <p class="eyebrow">Reservations</p>
+        <h1>Make an evening of it.</h1>
+        <p>A few simple choices. Then, just imagine the rest.</p>
       </div>
-      <p>A few simple choices.<br />We'll save the good part for the table.</p>
-    </div>
-    <ol class="reservation-steps">
-      <li>
-        <button
-          type="button"
-          [attr.aria-current]="flow.step() === 0 ? 'step' : null"
-          (click)="flow.step.set(0)"
-        >
-          <span>01</span>Your evening
-        </button>
-      </li>
-      <li>
-        <button
-          type="button"
-          [disabled]="flow.step() < 1"
-          [attr.aria-current]="flow.step() === 1 ? 'step' : null"
-          (click)="flow.step.set(1)"
-        >
-          <span>02</span>Your details
-        </button>
-      </li>
-      <li>
-        <button
-          type="button"
-          [disabled]="flow.step() < 2"
-          [attr.aria-current]="flow.step() === 2 ? 'step' : null"
-          (click)="flow.step.set(2)"
-        >
-          <span>03</span>A last look
-        </button>
-      </li>
-    </ol>
-    <div class="reservation-layout">
-      <section class="reservation-panel">
+      <ol class="reservation-steps">
+        <li>
+          <button
+            type="button"
+            [attr.aria-current]="flow.step() === 0 ? 'step' : null"
+            (click)="flow.step.set(0)"
+          >
+            <span>01</span>Your evening
+          </button>
+        </li>
+        <li>
+          <button
+            type="button"
+            [disabled]="flow.step() < 1"
+            [attr.aria-current]="flow.step() === 1 ? 'step' : null"
+            (click)="flow.step.set(1)"
+          >
+            <span>02</span>Your details
+          </button>
+        </li>
+        <li>
+          <button
+            type="button"
+            [disabled]="flow.step() < 2"
+            [attr.aria-current]="flow.step() === 2 ? 'step' : null"
+            (click)="flow.step.set(2)"
+          >
+            <span>03</span>A last look
+          </button>
+        </li>
+      </ol>
+      <section class="reservation-panel" [class.single-column]="flow.step() > 0">
         @switch (flow.step()) {
           @case (0) {
             <app-seating-step />
@@ -55,52 +61,29 @@
           }
         }
       </section>
-      <aside class="evening-preview">
-        <img
-          src="images/seasonal-plate-640.webp"
-          width="640"
-          height="360"
-          alt="The Sora seasonal plate in warm evening light"
-        />
-        <div class="evening-preview-body">
-          <p class="eyebrow">A little preview</p>
-          <h2>
-            A table for<br /><em>{{
-              flow.choice().party === 1
-                ? 'one.'
-                : flow.choice().party === 2
-                  ? 'two.'
-                  : 'good company.'
-            }}</em>
-          </h2>
-          <dl>
-            <div>
-              <dt>Your evening</dt>
-              <dd>
-                {{
-                  validDate(flow.choice().date)
-                    ? date(flow.choice().date, { weekday: 'short' })
-                    : 'Choose a date'
-                }}
-              </dd>
-            </div>
-            <div>
-              <dt>Your guests</dt>
-              <dd>
-                {{ flow.choice().party }} {{ flow.choice().party === 1 ? 'guest' : 'guests' }}
-              </dd>
-            </div>
-            <div>
-              <dt>Your time</dt>
-              <dd>{{ flow.choice().time || 'Take your time' }}</dd>
-            </div>
-          </dl>
-          <p class="privacy-note">
-            Seasonal plates. Warm light. A little less hurry.<br /><br />This is a local practice
-            reservation. No payment or real booking is made.
-          </p>
+      <dl class="reservation-receipt" aria-label="Your evening choices">
+        <div>
+          <dt>The evening</dt>
+          <dd>
+            {{
+              validDate(flow.choice().date)
+                ? date(flow.choice().date, { weekday: 'short' })
+                : 'Choose a date'
+            }}
+          </dd>
         </div>
-      </aside>
+        <div>
+          <dt>The company</dt>
+          <dd>{{ flow.choice().party }} {{ flow.choice().party === 1 ? 'guest' : 'guests' }}</dd>
+        </div>
+        <div>
+          <dt>The time</dt>
+          <dd>{{ flow.choice().time || 'Take your time' }}</dd>
+        </div>
+      </dl>
+      <p class="reservation-disclaimer">
+        A practice reservation. No actual table is held or payment taken.
+      </p>
     </div>
   </div>
 }

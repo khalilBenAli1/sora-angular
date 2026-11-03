@@ -1,0 +1,118 @@
+<div class="desk-page shell">
+  <div class="desk-access">
+    <span aria-hidden="true">●</span>Demo access · Local sample data. No sign-in or real customer
+    records.
+  </div>
+  <div class="desk-title">
+    <div>
+      <p class="eyebrow">Sora · Reservation desk</p>
+      <h1>An evening<br /><em>in view.</em></h1>
+    </div>
+    <a routerLink="/reserve" class="button">New demo reservation ↗</a>
+  </div>
+  <div class="desk-metrics">
+    <div>
+      <span>Confirmed tables</span><strong>{{ store.confirmed().length }}</strong>
+    </div>
+    <div>
+      <span>Expected guests</span><strong>{{ store.covers() }}</strong>
+    </div>
+    <div>
+      <span>Cancelled</span><strong>{{ store.cancelledCount() }}</strong>
+    </div>
+    <p>All figures are derived from local demo reservations.</p>
+  </div>
+  <div class="desk-filters">
+    <label
+      >Search reservations<input
+        #searchField
+        type="search"
+        placeholder="Guest or reference"
+        [value]="query()"
+        (input)="query.set(searchField.value)" /></label
+    ><label
+      >Evening<input
+        #dateField
+        type="date"
+        [value]="date()"
+        (input)="date.set(dateField.value)" /></label
+    ><label
+      >Status<select #statusField [value]="status()" (change)="filterStatus(statusField.value)">
+        <option value="all">All reservations</option>
+        <option value="confirmed">Confirmed</option>
+        <option value="cancelled">Cancelled</option>
+      </select></label
+    ><button type="button" class="clear-filters" (click)="clearFilters()">Reset filters</button>
+  </div>
+  <div class="desk-view-toolbar">
+    <p role="status">
+      {{ matching().length }} {{ matching().length === 1 ? 'reservation' : 'reservations' }} in this
+      view
+    </p>
+    <div role="group" aria-label="Reservation view">
+      <button type="button" [attr.aria-pressed]="view() === 'list'" (click)="view.set('list')">
+        List</button
+      ><button
+        type="button"
+        [attr.aria-pressed]="view() === 'calendar'"
+        (click)="view.set('calendar')"
+      >
+        Calendar
+      </button>
+    </div>
+  </div>
+  <p #deskNotice class="desk-notice" role="status" tabindex="-1">{{ notice() }}</p>
+  @if (!store.storageAvailable()) {
+    <p class="field-error" role="status">
+      Your browser could not save these choices. They remain available for this visit only.
+    </p>
+  }
+  @if (view() === 'calendar') {
+    <app-reservation-calendar
+      [records]="matching()"
+      [selected]="date()"
+      (chosen)="date.set($event)"
+    />
+  }
+  @if (view() === 'list' || date()) {
+    @if (matching().length) {
+      <app-reservation-list
+        [records]="matching()"
+        (edited)="editing.set($event)"
+        (cancelled)="cancelling.set($event)"
+      />
+    } @else {
+      <div class="desk-empty">
+        <p class="eyebrow">A clear view</p>
+        <h2>No reservations match this view.</h2>
+        <p>Try another date, guest name or status.</p>
+        <button type="button" class="button" (click)="clearFilters()">
+          Show all reservations ↗
+        </button>
+      </div>
+    }
+  }
+  <div class="desk-bottom">
+    <p>Changes affect this browser only. Contact details are never stored or sent.</p>
+    <button type="button" (click)="resetOpen.set(true)">Reset demo data</button>
+  </div>
+</div>
+<app-reservation-editor
+  [reservation]="editing()"
+  (closed)="editing.set(null)"
+  (saved)="saved($event)"
+/>
+<app-modal [open]="cancelling() !== null" title="A change of plans?" (closed)="cancelling.set(null)"
+  ><p>Cancel {{ cancelling()?.id }}? Its places will become available again in this local demo.</p>
+  <div class="modal-actions">
+    <button type="button" class="text-link" (click)="cancelling.set(null)">Keep reservation</button
+    ><button type="button" class="button" (click)="cancel()">Cancel reservation</button>
+  </div></app-modal
+>
+<app-modal [open]="resetOpen()" title="Start a fresh evening?" (closed)="resetOpen.set(false)"
+  ><p>This replaces local changes with the original four sample reservations.</p>
+  <div class="modal-actions">
+    <button type="button" class="text-link" (click)="resetOpen.set(false)">Keep my changes</button
+    ><button type="button" class="button" (click)="reset()">Reset demo</button>
+  </div></app-modal
+>

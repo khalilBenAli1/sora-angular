@@ -1,46 +1,46 @@
-<section class="shell dining-hero">
-  <div class="hero-copy">
-    <p class="eyebrow">Seasonal dining · A little curiosity</p>
-    <h1>From the <em>kitchen.</em></h1>
-    <p class="hero-description">
-      Good ingredients. A little curiosity.<br />Something worth sitting down for.
-    </p>
-    <a routerLink="/reserve" class="text-link"
-      >Make an evening of it <span aria-hidden="true">↗</span></a
+<section class="arrival-scene" aria-label="Welcome to Sora">
+  <img
+    class="arrival-photograph"
+    src="images/dining-room-1920.webp"
+    srcset="
+      images/dining-room-640.webp   640w,
+      images/dining-room-1280.webp 1280w,
+      images/dining-room-1920.webp 1672w
+    "
+    sizes="100vw"
+    width="1672"
+    height="941"
+    alt="An intimate dining room at dusk, with walnut tables, candlelight and a warm open kitchen"
+    fetchpriority="high"
+  />
+  <div class="arrival-shade"></div>
+  <div class="arrival-title">
+    <p class="eyebrow">A seasonal kitchen. An unhurried evening.</p>
+    <h1>SORA</h1>
+    <p class="arrival-tagline">Come as you are.<br /><em>Stay for the evening.</em></p>
+    <a routerLink="/reserve" class="arrival-reserve"
+      >Reserve a table <span aria-hidden="true">↗</span></a
     >
-    <div class="hero-note">
-      <span class="sun-mark" aria-hidden="true">✳</span
-      ><span>Thoughtful plates.<br />Unhurried evenings.</span>
-    </div>
   </div>
-  <figure class="hero-photograph">
-    <img
-      src="images/seasonal-plate-1920.webp"
-      srcset="
-        images/seasonal-plate-640.webp   640w,
-        images/seasonal-plate-1280.webp 1280w,
-        images/seasonal-plate-1920.webp 1672w
-      "
-      sizes="(max-width: 760px) 100vw, 65vw"
-      width="1672"
-      height="941"
-      alt="Roasted seasonal roots with tahini cream and herbs on a dark ceramic plate"
-      fetchpriority="high"
-    />
-    <figcaption>A seasonal plate · From the Sora kitchen</figcaption>
-    <span class="photo-caption">Made for<br /><em>the moment.</em></span>
-  </figure>
+  <div class="arrival-bottom">
+    <p>Seasonal dining<br /><span>Tuesday–Sunday · From 18:00</span></p>
+    <button type="button" (click)="scrollToMenu()">
+      Explore the evening <span aria-hidden="true">↓</span>
+    </button>
+    <p>Thoughtful ingredients.<br /><span>A little curiosity.</span></p>
+  </div>
 </section>
-<section class="shell menu-section" id="menu" aria-labelledby="menu-heading">
-  <div class="section-heading">
-    <div>
-      <p class="eyebrow">A few things, done thoughtfully</p>
-      <h2 id="menu-heading">The evening's<br /><em>possibilities.</em></h2>
+<section class="evening-menu" id="menu" aria-labelledby="menu-heading">
+  <div class="shell">
+    <div class="menu-introduction">
+      <p class="eyebrow">An appetite for the season</p>
+      <h2 id="menu-heading" tabindex="-1">A few things,<br /><em>done thoughtfully.</em></h2>
+      <p>
+        From the first bright bite to the last little spoonful.<br />Follow your appetite. Leave
+        room for a surprise.
+      </p>
     </div>
-    <p>Follow your appetite.<br />Leave a little room for something sweet.</p>
-  </div>
-  <div class="menu-layout">
-    <div class="menu-categories" aria-label="Menu categories">
+    <div class="course-navigation" role="group" aria-label="Menu categories">
       @for (category of categories; track category; let index = $index) {
         <button
           type="button"
@@ -49,38 +49,83 @@
           (click)="selected.set(category)"
         >
           <span>0{{ index + 1 }}</span
-          >{{ category }}<span aria-hidden="true">↗</span>
+          >{{ category }}
         </button>
       }
     </div>
-    <div class="dish-list" aria-live="polite">
-      @for (dish of dishes(); track dish.id) {
-        <button type="button" class="dish-row" (click)="detail.set(dish)">
-          <span
-            ><strong>{{ dish.name }}</strong
-            ><small>{{ dish.description }}</small>
-            @if (dish.note) {
-              <span class="dish-note">{{ dish.note }}</span>
-            }</span
-          ><span class="dish-price">{{ euros(dish.price) }}<span aria-hidden="true">↗</span></span>
+    <div #courseRail (scroll)="updateRail()" class="course-grid" aria-live="polite">
+      @for (dish of dishes(); track dish.id; let index = $index) {
+        <button
+          type="button"
+          class="course"
+          (focus)="revealCourse($event)"
+          (click)="detail.set(dish)"
+        >
+          <span class="course-index">0{{ index + 1 }} / {{ selected() }}</span
+          ><strong class="course-title">{{ dish.name }}</strong
+          ><span class="course-description">{{ dish.description }}</span
+          ><span class="course-bottom"
+            ><strong>{{ euros(dish.price) }}</strong
+            ><span>Discover <span aria-hidden="true">↗</span></span></span
+          >
         </button>
       }
-      <p class="menu-footnote">
-        An illustrative seasonal menu. Prices are sample prices. Ask a real restaurant directly
-        about ingredients and dietary needs.
-      </p>
     </div>
+    <div class="course-rail-controls">
+      <span>Explore the courses</span>
+      <div>
+        <button
+          type="button"
+          aria-label="Previous dishes"
+          [disabled]="!canPrevious()"
+          (click)="moveCourses(-1)"
+        >
+          ←</button
+        ><button
+          type="button"
+          aria-label="Next dishes"
+          [disabled]="!canNext()"
+          (click)="moveCourses(1)"
+        >
+          →
+        </button>
+      </div>
+    </div>
+    <p class="menu-footnote">
+      Fictional seasonal menu · Illustrative prices. For ingredient or dietary questions, contact a
+      real restaurant directly.
+    </p>
   </div>
-  <a routerLink="/reserve" class="button mobile-menu-book"
-    >Book a table <span aria-hidden="true">↗</span></a
-  >
 </section>
-<section class="story-strip">
-  <div class="shell">
-    <p class="eyebrow">The way we see it</p>
-    <h2>A good evening isn't rushed.<br /><em>Neither is a good plate.</em></h2>
-    <a routerLink="/story" class="text-link">A little about us <span aria-hidden="true">↗</span></a>
-  </div>
+<figure class="plate-interlude">
+  <img
+    src="images/seasonal-plate-1920.webp"
+    srcset="
+      images/seasonal-plate-640.webp   640w,
+      images/seasonal-plate-1280.webp 1280w,
+      images/seasonal-plate-1920.webp 1672w
+    "
+    sizes="100vw"
+    width="1672"
+    height="941"
+    alt="A seasonal plate of roasted roots, tahini cream, toasted seeds and garden herbs"
+    loading="lazy"
+  />
+  <figcaption>Roasted roots. A little warmth.<br /><em>A plate of the season.</em></figcaption>
+</figure>
+<section class="philosophy-note">
+  <p class="eyebrow">The way we see it</p>
+  <h2>A kitchen led by curiosity.<br /><em>A table made for company.</em></h2>
+  <p>
+    Good ingredients need attention, not complication. We imagine a place where the season sets the
+    menu and the evening finds its own rhythm.
+  </p>
+  <a routerLink="/story" class="round-link">Our philosophy <span aria-hidden="true">↗</span></a>
+</section>
+<section class="evening-invitation">
+  <p class="eyebrow">Make time for an evening</p>
+  <h2>The table is set.</h2>
+  <a routerLink="/reserve" class="button">Reserve a table <span aria-hidden="true">↗</span></a>
 </section>
 <app-modal
   [open]="detail() !== null"
@@ -92,9 +137,7 @@
     <p class="dish-detail">{{ dish.detail }}</p>
     <div class="dish-detail-footer">
       <strong>{{ euros(dish.price) }}</strong
-      ><a routerLink="/reserve" class="button" (click)="detail.set(null)"
-        >A place at our table <span aria-hidden="true">↗</span></a
-      >
+      ><a routerLink="/reserve" class="button" (click)="detail.set(null)">A place at our table ↗</a>
     </div>
     <p class="sample-note">Fictional menu, illustrative prices. No order is placed.</p>
   }
