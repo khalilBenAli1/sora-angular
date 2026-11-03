@@ -1,0 +1,46 @@
+<a class="skip-link" href="#main-content" (click)="skip($event)">Skip to content</a>
+<header class="site-header shell">
+  <a routerLink="/" class="wordmark" aria-label="Sora home">SORA<span>SEASONAL DINING</span></a>
+  <nav aria-label="Main" class="desktop-nav">
+    <a routerLink="/" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active"
+      >The menu</a
+    >
+    <a routerLink="/story" routerLinkActive="active">Our story</a>
+    <a routerLink="/visit" routerLinkActive="active">Find us</a>
+  </nav>
+  <a routerLink="/reserve" class="button outline header-book"
+    >Book a table <span aria-hidden="true">↗</span></a
+  >
+  <button
+    class="icon-button menu-toggle"
+    type="button"
+    aria-label="Open menu"
+    (click)="menuOpen.set(true)"
+  >
+    <span></span><span></span>
+  </button>
+</header>
+<main id="main-content" tabindex="-1"><router-outlet (activate)="onNavigate()" /></main>
+<footer class="site-footer shell">
+  <div class="footer-invitation">
+    <p class="eyebrow">A little less hurry. A little more evening.</p>
+    <a routerLink="/reserve">A place at <em>our table.</em><span aria-hidden="true">↗</span></a>
+  </div>
+  <div class="footer-row">
+    <a routerLink="/" class="wordmark">SORA</a>
+    <p>An original restaurant demo. All reservations are simulated.</p>
+    <a routerLink="/desk">Demo reservation desk <span aria-hidden="true">↗</span></a>
+  </div>
+</footer>
+<app-modal [open]="menuOpen()" title="Stay a little longer" (closed)="menuOpen.set(false)">
+  <nav class="mobile-nav" aria-label="Mobile">
+    <a (click)="menuOpen.set(false)" routerLink="/">The menu</a
+    ><a (click)="menuOpen.set(false)" routerLink="/story">Our story</a
+    ><a (click)="menuOpen.set(false)" routerLink="/visit">Find us</a
+    ><a (click)="menuOpen.set(false)" routerLink="/reserve" class="button"
+      >Book a table <span aria-hidden="true">↗</span></a
+    ><a (click)="menuOpen.set(false)" routerLink="/desk" class="small-link"
+      >Demo reservation desk</a
+    >
+  </nav>
+</app-modal>
